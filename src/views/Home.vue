@@ -7,7 +7,7 @@
     >
       <q-form
         class="q-gutter-md"
-        @submit="submit"
+        @submit="create()"
       >
         <q-input
           v-model="state.item.title"
@@ -24,7 +24,27 @@
       >
         <q-card>
           <q-card-section>
-            {{ item.title }}
+            <div
+              class="row justify-center"
+            >
+              <div
+                class="col-11 text-left"
+              >
+                {{ item.title }}
+              </div>
+              <div
+                class="col-1 text-center"
+              >
+                <q-btn
+                  color="secondary"
+                  outline
+                  round
+                  size="xs"
+                  icon="delete"
+                  @click="destroy(item)"
+                />
+              </div>
+            </div>
           </q-card-section>
         </q-card>
       </div>
@@ -35,7 +55,6 @@
 <script>
 import {
   reactive,
-  computed,
 } from 'vue';
 
 export default {
@@ -43,21 +62,28 @@ export default {
   setup() {
     const state = reactive({
       item: {},
-      items: [],
+      items: JSON.parse(localStorage.getItem('items')) || [],
     });
-    const localItems = computed(() => localStorage.getItem('items') || []);
-    if (localItems.value.length > 0) {
-      state.items = JSON.parse(localItems.value);
-    }
-    const submit = () => {
-      state.items.unshift(state.item);
+
+    const store = () => {
       localStorage.setItem('items', JSON.stringify(state.items));
+    };
+
+    const create = () => {
+      state.items.unshift(state.item);
+      store();
       state.item = {};
     };
+
+    const destroy = (item) => {
+      state.items = state.items.filter((i) => i.title !== item.title);
+      store();
+    };
+
     return {
       state,
-      localItems,
-      submit,
+      create,
+      destroy,
     };
   },
 };
