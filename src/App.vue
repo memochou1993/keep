@@ -1,7 +1,13 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
+  <q-layout
+    view="hHh Lpr fFf"
+  >
+    <q-header
+      elevated
+    >
+      <q-toolbar
+         class="bg-secondary"
+      >
         <q-toolbar-title>
           Keep
         </q-toolbar-title>
@@ -15,11 +21,6 @@
 
 <script>
 export default {
-  name: 'LayoutDefault',
-  setup() {
-    return {
-      //
-    };
-  },
+  name: 'App',
 };
 </script>
