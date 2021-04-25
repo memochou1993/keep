@@ -56,10 +56,15 @@
 import {
   reactive,
 } from 'vue';
+import {
+  useGtm,
+} from 'vue-gtm';
 
 export default {
   name: 'Home',
   setup() {
+    const gtm = useGtm();
+
     const state = reactive({
       item: {},
       items: JSON.parse(localStorage.getItem('items')) || [],
@@ -70,12 +75,26 @@ export default {
     };
 
     const create = () => {
+      gtm.trackEvent({
+        event: 'create',
+        category: 'common',
+        action: 'click',
+        value: state.item,
+      });
+
       state.items.unshift(state.item);
       store();
       state.item = {};
     };
 
     const destroy = (item) => {
+      gtm.trackEvent({
+        event: 'destroy',
+        category: 'common',
+        action: 'click',
+        value: item,
+      });
+
       state.items = state.items.filter((i) => i.title !== item.title);
       store();
     };

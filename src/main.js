@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import { Quasar } from 'quasar';
 import VueGtag from 'vue-gtag-next';
+import { createGtm } from 'vue-gtm';
 import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
@@ -16,4 +17,10 @@ createApp(App)
       id: 'G-J7M1ZGEG4Q',
     },
   })
+  .use(createGtm({
+    id: 'GTM-KDD2FBM',
+    debug: true,
+    vueRouter: router,
+    trackOnNextTick: false,
+  }))
   .mount('#app');
