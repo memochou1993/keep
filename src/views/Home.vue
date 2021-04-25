@@ -3,7 +3,7 @@
     class="row justify-center q-pa-xl"
   >
     <div
-      class="col-6"
+      class="col-xs-12 col-sm-6"
     >
       <q-form
         class="q-gutter-md"
@@ -28,12 +28,12 @@
               class="row justify-center"
             >
               <div
-                class="col-11 text-left"
+                class="col-xs-10 col-sm-11 text-left"
               >
                 {{ item.title }}
               </div>
               <div
-                class="col-1 text-center"
+                class="col-xs-2 col-sm-1 text-center"
               >
                 <q-btn
                   color="secondary"
