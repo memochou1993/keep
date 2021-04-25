@@ -82,6 +82,10 @@ export default {
         value: state.item,
       });
 
+      if (state.items.find((i) => i.title === state.item.title)) {
+        return;
+      }
+
       state.items.unshift(state.item);
       store();
       state.item = {};
